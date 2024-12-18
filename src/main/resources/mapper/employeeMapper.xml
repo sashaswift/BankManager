@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.bankmanager.mapper.EmployeeMapper">
+    <select id="getAll" resultType="com.example.bankmanager.conService.EmployeeInformation">
+        SELECT * from Employee
+    </select>
+
+    <select id="getEmployeeNumber" resultType="int">
+        SELECT COUNT(*) from Employee
+    </select>
+    
+    <delete id="DeleteById">
+        DELETE FROM Employee WHERE employeeid=#{employeeid}
+    </delete>
+
+    <select id="startBackUp" >
+        {CALL Procedurebackup()}
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bankmanager.mapper.AccountMapper">
+    <select id="getAll" resultType="com.example.bankmanager.conService.AccountInformation">
+        SELECT * from Card
+    </select>
+
+    <select id="getSum" resultType="int">
+        SELECT COUNT(*) from Card
+    </select>
+
+    <update id="PutAccountState">
+        UPDATE Card SET accountstate = #{accountstate} <!--,personid=#{personid}, cardpasswd=#{cardpasswd},opendate=#{opendate} -->
+        WHERE cardid = #{cardid}
+    </update>
+
+
+    <update id="PutAccountPassWord">
+        UPDATE Card SET cardpasswd = #{password} <!--,personid=#{personid}, cardpasswd=#{cardpasswd},opendate=#{opendate} -->
+        WHERE cardid = #{cardid}
+    </update>
+
+</mapper>

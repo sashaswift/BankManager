@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.bankmanager.mapper.DepositManagerMapper">
+    <select id="getAll" resultType="com.example.bankmanager.conService.DepositManagerInformation">
+        SELECT * from Depositmanage
+    </select>
+    <select id="getSum" resultType="int">
+        SELECT COUNT(*) FROM Depositmanage
+    </select>
+    <delete id="deleteDepositManager">
+        DELETE FROM Depositmanage where depositid=#{depositid}
+    </delete>
+
+    <select id="getFlexAll" resultType="com.example.bankmanager.conService.DepositManagerInformation">
+        SELECT * FROM Depositmanage where remark != '活期存款'
+    </select>
+    
+    <select id="GetByRemark" resultType="java.lang.String">
+        SELECT depositid FROM Depositmanage where remark=#{remark}
+    </select>
+</mapper>

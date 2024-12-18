@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bankmanager.mapper.DepositMapper">
+    <select id="getAllflexToTurn" resultType="com.example.bankmanager.conService.DepositInformationUser">
+        SELECT * from Depositcard
+            <where>
+               depositid=#{depositid} and startdate &lt;=#{timenow}
+            </where>
+    </select>
+
+    <select id="getDepositNum" resultType="int">
+        SELECT COUNT(*) from Depositcard where depositid=#{depositid}
+    </select>
+
+    <select id="getAllInflexToTurn" resultType="com.example.bankmanager.conService.DepositInformationUser">
+        SELECT * FROM Depositcard WHERE depositid IN (SELECT depositid FROM Depositmanage WHERE remark=#{remark})
+    </select>
+
+    <select id="getTheBalance" resultType="java.math.BigDecimal">
+        SELECT Depositcard.depositbalance*Depositmanage.interest from Depositcard,Depositmanage where Depositcard.id=#{id} AND Depositmanage.depositid=#{depositid}
+    </select>
+
+    <select id="DeleteDeposit" statementType="CALLABLE">
+        {CALL Transaction4(#{vdepositid1, mode=IN, jdbcType=CHAR, javaType=java.lang.String},#{vdepositid2, mode=IN, jdbcType=CHAR, javaType=java.lang.String},#{vcardid, mode=IN, jdbcType=CHAR, javaType=java.lang.String}, #{vamount, mode=IN, jdbcType=DECIMAL, javaType=java.math.BigDecimal})}
+    </select>
+
+    <select id="UpdateDepositAdd" statementType="CALLABLE">
+        {CALL Transaction1(#{vdepositid, mode=IN, jdbcType=CHAR, javaType=java.lang.String},#{vcardid, mode=IN, jdbcType=CHAR, javaType=java.lang.String}, #{vamount, mode=IN, jdbcType=DECIMAL, javaType=java.math.BigDecimal})}
+    </select>
+
+
+
+</mapper>
